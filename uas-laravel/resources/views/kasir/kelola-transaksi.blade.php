@@ -64,7 +64,7 @@
                 <table class="table table-bordered text-center">
                     <thead class="table-light">
                         <tr>
-                            <th>ID Transaksi</th>
+                            <th>No Transaksi</th>
                             <th>Kode Barang</th>
                             <th>Nama Barang</th>
                             <th>Harga Satuan</th>
@@ -75,7 +75,7 @@
                     <tbody>
                         @forelse($keranjang as $item)
                         <tr>
-                            <td>{{ $item['id_transaksi'] ?? '' }}</td>
+                            <td>{{ $item['no_transaksi'] ?? '' }}</td>
                             <td>{{ $item['kode_barang'] }}</td>
                             <td>{{ $item['nama_barang'] }}</td>
                             <td>Rp. {{ number_format($item['harga_satuan'], 0, ',', '.') }}</td>

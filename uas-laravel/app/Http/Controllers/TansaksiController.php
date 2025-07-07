@@ -40,7 +40,7 @@ class TansaksiController extends Controller
         $qty = $request->quantitas;
         $subtotal = $barang->harga_satuan * $qty;
         $keranjang[] = [
-            'id_transaksi' => uniqid('TR-'),
+            'no_transaksi' => uniqid('TR-'),
             'id_barang' => $barang->id_barang,
             'kode_barang' => $barang->kode_barang,
             'nama_barang' => $barang->nama_barang,
