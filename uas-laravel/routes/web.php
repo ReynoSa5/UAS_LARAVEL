@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TansaksiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Middleware\CekTipeUser;
 use App\Models\TableTransaksi;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,7 @@ Route::get('login',[LoginController::class,'login'])->name('login');
 Route::post('login',[LoginController::class,'login_user']);
 
 // ADMIN
-Route::middleware(['auth:usep', \App\Http\Middleware\CekTipeUser::class.':admin'])->group(function(){
+Route::middleware(['auth:usep', CekTipeUser::class.':admin'])->group(function(){
     Route::get('admin/log',[LoginController::class,'log']);
     Route::get('admin/kelola-user',[UserController::class,'index']);
     Route::post('admin/kelola-user',[UserController::class,'store']);
@@ -27,7 +28,7 @@ Route::middleware(['auth:usep', \App\Http\Middleware\CekTipeUser::class.':admin'
 });
 
 // GUDANG
-Route::middleware(['auth:usep', \App\Http\Middleware\CekTipeUser::class.':gudang'])->group(function(){
+Route::middleware(['auth:usep', CekTipeUser::class.':gudang'])->group(function(){
     Route::get('gudang/kelola-barang', [LoginController::class, 'kelolaBarang']);
     Route::get('gudang/kelola-barang', [BarangController::class, 'index']);
     Route::post('gudang/kelola-barang', [BarangController::class, 'store']);
@@ -36,7 +37,7 @@ Route::middleware(['auth:usep', \App\Http\Middleware\CekTipeUser::class.':gudang
 });
 
 // KASIR
-Route::middleware(['auth:usep', \App\Http\Middleware\CekTipeUser::class . ':kasir'])->group(function(){
+Route::middleware(['auth:usep', CekTipeUser::class . ':kasir'])->group(function(){
     Route::get('kasir/kelola-transaksi', [TansaksiController::class, 'formTransaksi']);
     Route::post('kasir/kelola-transaksi/tambah', [TansaksiController::class, 'tambahKeranjang']);
     Route::post('kasir/kelola-transaksi/reset', [TansaksiController::class, 'resetKeranjang']);
